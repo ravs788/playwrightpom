@@ -26,7 +26,8 @@ This repository contains an automated end-to-end test suite for the [saucedemo.c
 │   └── LoginPage.js
 ├── tests/
 │   ├── saucedemo.spec.js
-│   └── multiItemsCheckout.spec.js
+│   ├── multiItemsCheckout.spec.js
+│   └── inventoryItems.spec.js
 └── ...
 ```
 
@@ -39,26 +40,51 @@ This repository contains an automated end-to-end test suite for the [saucedemo.c
 
 ---
 
-## 🚀 Getting Started
+## � Test Tagging Strategy
 
-```bash
-# 1. Install dependencies
-npm ci
+Tests are tagged to manage suites:
 
-# 2. Run the full test suite
-npx playwright test
+* `@smoke` — fast, critical checks (e.g. high-priority UI flow)
+* `@regression` — coverage for all major business logic
 
-# 3. Open the last HTML report
-npx playwright show-report
+A test can have both tags.
+Add tags in the test title:  
+```js
+test('should do important thing {@smoke} {@regression}', async () => { ... });
 ```
 
-### Running a Single Spec
+---
+
+## 🚀 Running Tests
+
+**All test files execute in parallel** as configured in `playwright.config.js` (`fullyParallel: true`).  
+Within a file, tests run sequentially unless you use `test.describe.parallel()`.
+
+#### Run the full test suite
+
+```bash
+npm test           # (cleans output, then runs all specs)
+```
+
+#### Run only regression tests
+
+```bash
+npm run test:regression
+```
+
+#### Run only smoke tests
+
+```bash
+npx playwright test --grep '@smoke'
+```
+
+#### Running a Specific Spec
 
 ```bash
 npx playwright test tests/saucedemo.spec.js
 ```
 
-### Headed / Debug Mode
+#### Debug/Headed Mode
 
 ```bash
 npx playwright test --headed --debug
@@ -69,19 +95,38 @@ npx playwright test --headed --debug
 ## 📊 Reports & Artifacts
 
 * **HTML Report**: Generated in `playwright-report/`.
-* **Trace Viewer**: If a test fails, traces are stored in `test-results/` and can be opened with  
-  `npx playwright show-trace <trace.zip>`.
+* **Trace Viewer**: On test failure, inspect details with  
+  `npx playwright show-trace test-results/**/trace.zip`.
+* **Screenshots on Failure**: PNGs saved automatically for failed steps in `test-results/`.
+
+---
+
+## ♻️ Output Folder Cleanup
+
+Before every test run, `test-results/` and `playwright-report/` are auto-deleted
+by the `clean` npm script.
+
+---
+
+## 🤖 Continuous Integration
+
+GitHub Actions automates test selection through reusable workflows:
+
+| Workflow                   | Trigger          | Tag Filter     |
+|----------------------------|------------------|---------------|
+| `.github/workflows/pr-tests.yml`   | On PR to `main`   | `@smoke`      |
+| `.github/workflows/merge-tests.yml`| On push to `main` | `@regression` |
 
 ---
 
 ## 📐 Diagrams
 
-Refer to **`test-flow-diagram.md`** for:
+See **`test-flow-diagram.md`** for:
 
-1. A **navigation flowchart** mapping test execution.
-2. A **UML class diagram** illustrating test files and page objects.
+1. Navigation flowchart of all spec-file/page-object interactions
+2. UML class diagram for test/page relationships
 
-Both are written in Mermaid and render on GitHub / VS Code preview.
+Both use Mermaid and are VS Code-/GitHub-friendly.
 
 ---
 
@@ -97,9 +142,16 @@ The repo’s `.gitignore` excludes:
 
 ---
 
+## 🧪 Example Tests
+
+* Two smoke tests in `saucedemo.spec.js` (one deliberately fails to demo screenshot)
+* Standalone regression: `inventoryItems.spec.js` verifies inventory items
+
+---
+
 ## 🤝 Contributing
 
-Feel free to open issues or PRs! Ensure `npm test` passes and keep commits atomic.
+Feel free to open issues or PRs! Ensure all tests pass before pushing.
 
 ---
 
