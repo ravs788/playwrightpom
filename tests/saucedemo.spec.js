@@ -25,3 +25,11 @@ test("should complete the checkout process {@smoke} {@regression}", async ({
     "Thank you for your order!"
   );
 });
+
+test("should deliberately fail to demonstrate screenshot capture {@smoke}", async ({ page }) => {
+  // Navigate to the site
+  await page.goto("https://www.saucedemo.com/");
+
+  // Intentionally failing assertion: URL should **not** match this regex
+  await expect(page).toHaveURL(/non-existing-url/);
+});
