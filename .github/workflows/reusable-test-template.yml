@@ -1,0 +1,26 @@
+name: Reusable Playwright Test Template
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: "Node.js version to use for the workflow"
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: npm
+      - name: Install dependencies
+        run: npm install
+      - name: Install Playwright browsers
+        run: npx playwright install
+      - name: Run tests
+        run: npx playwright test --grep "@{${{ inputs.test-tag }}}" || true
