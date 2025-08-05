@@ -1,0 +1,11 @@
+name: Merge Tests
+on:
+  push:
+    branches: [main]
+
+jobs:
+  run-tests:
+    uses: ./.github/workflows/reusable-test-template.yml
+    with:
+      node-version: "18"
+      test-tag: regression

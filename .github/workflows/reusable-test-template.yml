@@ -6,6 +6,14 @@ on:
         description: "Node.js version to use for the workflow"
         required: true
         type: string
+      test-tag:
+        description: "Playwright tag to filter tests (optional)"
+        required: false
+        type: string
+      test-command:
+        description: "Custom command to run tests (optional)"
+        required: false
+        type: string
 
 jobs:
   test:
@@ -23,4 +31,11 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install
       - name: Run tests
-        run: npx playwright test --grep "@{${{ inputs.test-tag }}}" || true
+        run: |
+          if [ -n "${{ inputs.test-command }}" ]; then
+            ${{ inputs.test-command }}
+          elif [ -n "${{ inputs.test-tag }}" ]; then
+            npx playwright test --grep "@${{ inputs.test-tag }}"
+          else
+            npx playwright test
+          fi
