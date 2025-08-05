@@ -1,0 +1,24 @@
+{
+  "name": "playwrightpom",
+  "version": "1.0.0",
+  "description": "This repository contains an automated end-to-end test suite for the [saucedemo.com](https://www.saucedemo.com) sample shop, built with **[Playwright](https://playwright.dev)** in JavaScript.",
+  "main": "playwright.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ravs788/playwrightpom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ravs788/playwrightpom/issues"
+  },
+  "homepage": "https://github.com/ravs788/playwrightpom#readme"
+}

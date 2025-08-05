@@ -53,6 +53,3 @@ playwright/.cache/
 # Ignore IDE specific folders
 .idea/
 *.iml
-
-package-lock.json
-package.json
