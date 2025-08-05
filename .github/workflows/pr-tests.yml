@@ -8,3 +8,4 @@ jobs:
     with:
       node-version: "18"
       test-tag: regression
+      test-command: npm run test:regression

@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf test-results playwright-report",
-    "test": "npm run clean && npx playwright test"
+    "test": "npm run clean && npx playwright test --project=chromium --project=firefox"
   },
   "keywords": [],
   "author": "",
