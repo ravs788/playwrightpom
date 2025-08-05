@@ -29,13 +29,17 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Install Playwright browsers
-        run: npx playwright install
+        run: npx playwright install chromium firefox
       - name: Run tests
         run: |
+          # Determine which Playwright command to run
           if [ -n "${{ inputs.test-command }}" ]; then
-            ${{ inputs.test-command }}
+            CMD="${{ inputs.test-command }}"
           elif [ -n "${{ inputs.test-tag }}" ]; then
-            npx playwright test --grep "@${{ inputs.test-tag }}"
+            CMD="npx playwright test --grep '@${{ inputs.test-tag }}'"
           else
-            npx playwright test
+            CMD="npx playwright test"
           fi
+
+          echo "Running: $CMD"
+          eval "$CMD"
