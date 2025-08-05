@@ -6,6 +6,14 @@ on:
         description: "Node.js version to use for the workflow"
         required: true
         type: string
+      test-tag:
+        description: "Playwright tag to filter tests (optional)"
+        required: false
+        type: string
+      test-command:
+        description: "Custom command to run tests (optional)"
+        required: false
+        type: string
 
 jobs:
   test:
@@ -21,6 +29,17 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Install Playwright browsers
-        run: npx playwright install
+        run: npx playwright install chromium firefox
       - name: Run tests
-        run: npx playwright test --grep "@{${{ inputs.test-tag }}}" || true
+        run: |
+          # Determine which Playwright command to run
+          if [ -n "${{ inputs.test-command }}" ]; then
+            CMD="${{ inputs.test-command }}"
+          elif [ -n "${{ inputs.test-tag }}" ]; then
+            CMD="npx playwright test --grep '@${{ inputs.test-tag }}'"
+          else
+            CMD="npx playwright test"
+          fi
+
+          echo "Running: $CMD"
+          eval "$CMD"
