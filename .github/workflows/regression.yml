@@ -1,0 +1,12 @@
+name: "Daily Regression Run"
+
+on:
+  schedule:
+    - cron: "30 1 * * *" # 1:30 AM UTC = 7:00 AM IST
+  workflow_dispatch:
+
+jobs:
+  regression:
+    uses: ./.github/workflows/playwright-regression-template.yml
+    with:
+      test_grep: "@regression"
