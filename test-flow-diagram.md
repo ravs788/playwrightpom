@@ -2,60 +2,54 @@
 
 ```mermaid
 flowchart TD
-    %% ==================== TEST FILES =====================
     subgraph Tests
-        SingleItemTest["saucedemo.spec.js"]
-        MultiItemTest["multiItemsCheckout.spec.js"]
+        login["loginTests.spec.js"]
+        inventory["inventoryItemsTests.spec.js"]
+        checkout["itemsCheckouttests.spec.js"]
     end
 
-    %% =================== PAGE OBJECTS ====================
     subgraph Pages
-        LoginPage["LoginPage.js"]
-        InventoryPage["InventoryPage.js"]
-        CartPage["CartPage.js"]
-        CheckoutPage["CheckoutPage.js"]
+        loginPage["LoginPage.js"]
+        inventoryPage["InventoryPage.js"]
+        cartPage["CartPage.js"]
+        checkoutPage["CheckoutPage.js"]
     end
 
-    %% ================ NAVIGATION FLOW ===================
-    %% --- Single-item checkout ---
-    SingleItemTest --> LoginPage
-    SingleItemTest --> InventoryPage
-    InventoryPage --> CartPage
-    CartPage --> CheckoutPage
-    CheckoutPage -->|Order&nbsp;complete| SingleItemTest
+    subgraph Models
+        user["User.js"]
+        inventoryItem["InventoryItem.js"]
+        checkoutInfo["CheckoutInfo.js"]
+    end
 
-    %% --- Multi-item checkout (adds loop) ---
-    MultiItemTest --> LoginPage
-    MultiItemTest --> InventoryPage
-    InventoryPage -->|add items*| InventoryPage
-    InventoryPage --> CartPage
-    CartPage --> CheckoutPage
-    CheckoutPage -->|Order&nbsp;complete| MultiItemTest
-
-    %% ====================== STYLES =======================
-    classDef test fill:#C5CAE9,stroke:#303F9F,stroke-width:2px,color:#000;
-    classDef page fill:#B2DFDB,stroke:#00796B,stroke-width:2px,color:#000;
-
-    class SingleItemTest,MultiItemTest test;
-class LoginPage,InventoryPage,CartPage,CheckoutPage page;
-
+    login --> loginPage
+    loginPage --> user
+    inventory --> inventoryPage
+    inventoryPage --> inventoryItem
+    checkout --> checkoutPage
+    checkoutPage --> checkoutInfo
 ```
 
-## UML Class Diagram
+## UML Class Diagram (Minimal for Mermaid compatibility)
+
 ```mermaid
 classDiagram
-    class Tests {
-        +saucedemo.spec.js
-        +multiItemsCheckout.spec.js
-    }
+    class LoginTests { }
+    class InventoryItemsTests { }
+    class ItemsCheckoutTests { }
+    class LoginPage { }
+    class InventoryPage { }
+    class CartPage { }
+    class CheckoutPage { }
+    class User { }
+    class InventoryItem { }
+    class CheckoutInfo { }
 
-    class LoginPage
-    class InventoryPage
-    class CartPage
-    class CheckoutPage
-
-    Tests --> LoginPage : uses
-    Tests --> InventoryPage : uses
-    Tests --> CartPage : uses
-    Tests --> CheckoutPage : uses
+    LoginTests --> LoginPage
+    InventoryItemsTests --> InventoryPage
+    ItemsCheckoutTests --> CheckoutPage
+    LoginPage --> User
+    InventoryPage --> InventoryItem
+    CheckoutPage --> CheckoutInfo
 ```
+
+_Note: If errors persist, your Mermaid parser/editor may have custom restrictions. You can further simplify by removing all arrows and only listing class names._
