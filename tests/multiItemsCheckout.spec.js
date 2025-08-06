@@ -3,6 +3,7 @@ const { LoginPage } = require("../pages/LoginPage");
 const { InventoryPage } = require("../pages/InventoryPage");
 const { CartPage } = require("../pages/CartPage");
 const { CheckoutPage } = require("../pages/CheckoutPage");
+const config = require("../config.json");
 
 test("should add multiple items and complete full checkout flow {@regression}", async ({
   page,
@@ -12,10 +13,13 @@ test("should add multiple items and complete full checkout flow {@regression}", 
   const cartPage = new CartPage(page);
   const checkoutPage = new CheckoutPage(page);
 
-  await page.goto("https://www.saucedemo.com/");
+  await page.goto(config.baseUrl);
 
   // Login
-  await loginPage.login("standard_user", "secret_sauce");
+  await loginPage.login(
+    config.users.validUser.username,
+    config.users.validUser.password
+  );
 
   // Add multiple products
   const products = [
@@ -29,20 +33,20 @@ test("should add multiple items and complete full checkout flow {@regression}", 
 
   // Open Cart and verify number of items
   await inventoryPage.goToCart();
-  await expect(page.locator(".cart_item")).toHaveCount(products.length);
+  await expect(cartPage.cartItems).toHaveCount(products.length);
 
   // Proceed through checkout
   await cartPage.proceedToCheckout();
   await checkoutPage.fillCheckoutInfo("Alice", "Smith", "98765");
 
   // Verify overview page shows chosen items
-  await expect(page.locator(".cart_item")).toHaveCount(products.length);
+  await expect(cartPage.cartItems).toHaveCount(products.length);
 
   // Finish order
   await checkoutPage.finishCheckout();
 
   // Verify order completion
-  await expect(page.locator(".complete-header")).toContainText(
+  await expect(checkoutPage.completeHeader).toContainText(
     "Thank you for your order!"
   );
 });

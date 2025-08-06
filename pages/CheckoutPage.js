@@ -6,6 +6,7 @@ class CheckoutPage {
         this.zipCodeInput = page.locator('#postal-code');
         this.continueButton = page.locator('#continue');
         this.finishButton = page.locator('#finish');
+        this.completeHeader = page.locator('.complete-header');
     }
 
     async fillCheckoutInfo(firstName, lastName, zipCode) {
@@ -17,6 +18,10 @@ class CheckoutPage {
 
     async finishCheckout() {
         await this.finishButton.click();
+    }
+
+    async getCompletionHeaderText() {
+        return await this.completeHeader.textContent();
     }
 }
 

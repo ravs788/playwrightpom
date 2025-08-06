@@ -31,14 +31,23 @@ module.exports = {
   ],
   // Shared settings for all the projects below.
   use: {
-    headless: true, // headed mode
+    headless: !(
+      process.env.DEBUG === 'true' ||
+      typeof process.env.PWDEBUG !== 'undefined'
+    ), // headed mode in debug
     // launchOptions: { slowMo: 500 } // 500 ms delay between actions
     trace: "on-first-retry", // Enable tracing for debugging
   },
 
   // Define one project for each browser.
-  projects: [
-    { name: "Chromium", use: { browserName: "chromium" } },
-    { name: "Firefox", use: { browserName: "firefox" } },
-  ],
+  projects: process.env.CI
+    ? [
+        { name: "Chromium", use: { browserName: "chromium" } },
+        { name: "Firefox", use: { browserName: "firefox" } }
+      ]
+    : [
+        { name: "Chromium", use: { browserName: "chromium" } },
+        { name: "Firefox", use: { browserName: "firefox" } },
+        { name: "WebKit", use: { browserName: "webkit" } }
+      ],
 };

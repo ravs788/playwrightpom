@@ -18,6 +18,10 @@ class LoginPage {
     async getErrorMessage() {
         return await this.errorMessage.textContent();
     }
+
+    async isErrorVisible() {
+        return await this.errorMessage.isVisible();
+    }
 }
 
 module.exports = { LoginPage };
