@@ -23,7 +23,7 @@ module.exports = {
   reporter: "list",
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retriws: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined, // Use 1 worker in CI to avoid parallel issues
   reporter: [
     ["html", { open: "never" }], // Generate HTML report, do not open automatically
