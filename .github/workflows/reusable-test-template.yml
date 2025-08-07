@@ -26,8 +26,10 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: npm
-      - name: Install dependencies
-        run: npm install
+      - name: Ensure npm is at stable version
+        run: npm install -g npm@8.19.4
+      - name: Clean install dependencies from lockfile
+        run: npm ci
       - name: Ensure ESLint is present
         run: npm install eslint --registry=https://registry.npmjs.org
       - name: Lint source code
