@@ -4,7 +4,8 @@ on:
     inputs:
       node-version:
         description: "Node.js version to use for the workflow"
-        required: true
+        required: false
+        default: "18.x"
         type: string
       test-tag:
         description: "Playwright tag to filter tests (optional)"
@@ -26,6 +27,8 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: npm
+      - name: Clean npm cache
+        run: npm cache clean --force
       - name: Install dependencies
         run: npm install
       - name: Install Playwright browsers

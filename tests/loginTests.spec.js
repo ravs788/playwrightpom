@@ -10,7 +10,7 @@ test.describe("Login Tests", () => {
     testInfo.loginPage = new LoginPage(page);
   });
 
-  test("valid login should succeed", { tag: '@smoke' }, async ({ page }, testInfo) => {
+  test("valid login should succeed", { tag: "@smoke" }, async ({ page }, testInfo) => {
     const loginPage = testInfo.loginPage;
     await loginPage.login(
       config.users.validUser.username,
@@ -21,7 +21,7 @@ test.describe("Login Tests", () => {
     await expect(inventoryPage.inventoryList).toBeVisible();
   });
 
-  test("invalid login should show error", { tag: '@smoke' }, async ({ page }, testInfo) => {
+  test("invalid login should show error", { tag: "@smoke" }, async ({ page }, testInfo) => {
     const loginPage = testInfo.loginPage;
     await loginPage.login(
       config.users.invalidUser.username,

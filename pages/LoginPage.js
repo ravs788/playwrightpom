@@ -1,12 +1,12 @@
-const { expect } = require('@playwright/test');
+const { expect } = require("@playwright/test");
 
 class LoginPage {
     constructor(page) {
         this.page = page;
-        this.usernameInput = page.locator('#user-name');
-        this.passwordInput = page.locator('#password');
-        this.loginButton = page.locator('#login-button');
-        this.errorMessage = page.locator('[data-test="error"]');
+        this.usernameInput = page.locator("#user-name");
+        this.passwordInput = page.locator("#password");
+        this.loginButton = page.locator("#login-button");
+        this.errorMessage = page.locator("[data-test=\"error\"]");
     }
 
     async login(username, password) {
