@@ -5,7 +5,9 @@
   "scripts": {
     "clean": "rimraf test-results playwright-report",
     "test": "npm run clean && npx playwright test",
-    "test:regression": "npm run clean && npx playwright test --grep '@regression'"
+    "test:regression": "npm run clean && npx playwright test --grep '@regression'",
+    "lint": "eslint . --ext .js",
+    "lint:fix": "eslint . --ext .js --fix"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +15,7 @@
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.54.2",
+    "eslint": "^9.32.0",
     "rimraf": "^5.0.0"
   }
 }

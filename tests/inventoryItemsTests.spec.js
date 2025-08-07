@@ -14,7 +14,7 @@ test.describe("Inventory Items", () => {
     testInfo.inventoryPage = new InventoryPage(page);
   });
 
-  test("should list all expected inventory items after login", { tag: '@regression' }, async ({}, testInfo) => {
+  test("should list all expected inventory items after login", { tag: "@regression" }, async ({}, testInfo) => {
     const expectedItems = [
       "Sauce Labs Backpack",
       "Sauce Labs Bike Light",

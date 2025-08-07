@@ -32,8 +32,8 @@ module.exports = {
   // Shared settings for all the projects below.
   use: {
     headless: !(
-      process.env.DEBUG === 'true' ||
-      typeof process.env.PWDEBUG !== 'undefined'
+      process.env.DEBUG === "true" ||
+      typeof process.env.PWDEBUG !== "undefined"
     ), // headed mode in debug
     // launchOptions: { slowMo: 500 } // 500 ms delay between actions
     trace: "on-first-retry", // Enable tracing for debugging
