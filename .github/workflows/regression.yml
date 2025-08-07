@@ -9,4 +9,5 @@ jobs:
   regression:
     uses: ./.github/workflows/reusable-test-template.yml
     with:
-      test_grep: "@regression"
+      node-version: "18.x"
+      test-tag: regression
