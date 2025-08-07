@@ -29,7 +29,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Ensure ESLint is present
-        run: npm install --save-dev eslint --registry=https://registry.npmjs.org
+        run: npm install eslint --registry=https://registry.npmjs.org
       - name: Lint source code
         run: npm run lint
       - name: Install Playwright browsers
