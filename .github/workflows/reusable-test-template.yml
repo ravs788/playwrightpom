@@ -4,7 +4,8 @@ on:
     inputs:
       node-version:
         description: "Node.js version to use for the workflow"
-        required: true
+        required: false
+        default: "18.x"
         type: string
       test-tag:
         description: "Playwright tag to filter tests (optional)"
@@ -17,7 +18,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
