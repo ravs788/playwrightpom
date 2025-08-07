@@ -27,9 +27,7 @@ jobs:
           node-version: ${{ inputs.node-version }}
           cache: npm
       - name: Ensure npm is at stable version
-        run: npm install -g npm@8.19.4
-      - name: Clean install dependencies from lockfile
-        run: npm ci
+        run: npm install -g npm@8.19.4      
       - name: Install Playwright browsers
         run: npx playwright install chromium firefox
       - name: Run tests
