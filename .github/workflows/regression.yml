@@ -7,6 +7,6 @@ on:
 
 jobs:
   regression:
-    uses: ./.github/workflows/playwright-regression-template.yml
+    uses: ./.github/workflows/reusable-test-template.yml
     with:
       test_grep: "@regression"
