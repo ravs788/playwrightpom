@@ -20,8 +20,7 @@ test.describe("Items and Checkout Flow", () => {
   });
 
   test(
-    "should complete the checkout process",
-    { tag: "@regression" },
+    "should complete the checkout process @regression",
     async ({}, testInfo) => {
       const { inventoryPage, cartPage, checkoutPage } = testInfo;
       // Get test data for this test
@@ -43,8 +42,7 @@ test.describe("Items and Checkout Flow", () => {
   );
 
   test(
-    "should add multiple items and complete full checkout flow",
-    { tag: "@regression" },
+    "should add multiple items and complete full checkout flow @regression",
     async ({}, testInfo) => {
       const { inventoryPage, cartPage, checkoutPage } = testInfo;
       // Get test data for this test

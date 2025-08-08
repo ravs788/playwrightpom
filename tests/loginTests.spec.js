@@ -12,7 +12,7 @@ test.describe("Login Tests", () => {
   });
 
   data.users.forEach(({ username, password, valid }) => {
-    test(`[smoke] login with "${username}" and password "${password}" should ${valid ? "succeed" : "fail"}`, async ({ page }, testInfo) => {
+    test(`login with "${username}" and password "${password}" should ${valid ? "succeed" : "fail"} @smoke`, async ({ page }, testInfo) => {
       const loginPage = testInfo.loginPage;
       await loginPage.login(username, password);
 
