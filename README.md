@@ -1,14 +1,12 @@
 # Playwright Test Suite – SauceDemo
 
 <!-- Build Status Badges: Update file names if workflow names change -->
-[![Regression Workflow](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/regression.yml/badge.svg)](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/regression.yml)
-[![Reusable Test Template Workflow](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/reusable-test-template.yml/badge.svg)](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/reusable-test-template.yml)
-[![Playwright Regression Template Workflow](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/playwright-regression-template.yml/badge.svg)](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/playwright-regression-template.yml)
-![Node](https://img.shields.io/badge/Node.js-%3E=18.x-blue?logo=node.js)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Playwright](https://img.shields.io/badge/Playwright-E2E-green?logo=playwright)
+[![Pull Request Tests](https://github.com/ravs788/playwrightpom/actions/workflows/pr-tests.yml/badge.svg)](https://github.com/ravs788/playwrightpom/actions/workflows/pr-tests.yml)
+[![Daily Regression Run](https://github.com/ravs788/playwrightpom/actions/workflows/regression.yml/badge.svg)](https://github.com/ravs788/playwrightpom/actions/workflows/regression.yml)
+[![Merge Tests](https://github.com/ravs788/playwrightpom/actions/workflows/merge-tests.yml/badge.svg)](https://github.com/ravs788/playwrightpom/actions/workflows/merge-tests.yml)
 
 ---
+
 
 **Repository**: [github.com/ravs788/playwright-test-saucedemo](https://github.com/ravs788/playwright-test-saucedemo)  
 **Issues**: [Open Issues](https://github.com/ravs788/playwright-test-saucedemo/issues)  
