@@ -1,0 +1,30 @@
+{
+  "validUser": {
+    "username": "standard_user",
+    "password": "secret_sauce"
+  },
+  "tests": [
+    {
+      "name": "should complete the checkout process",
+      "products": ["Sauce Labs Backpack"],
+      "checkoutInfo": {
+        "firstName": "John",
+        "lastName": "Doe",
+        "postalCode": "12345"
+      }
+    },
+    {
+      "name": "should add multiple items and complete full checkout flow",
+      "products": [
+        "Sauce Labs Backpack",
+        "Sauce Labs Bike Light",
+        "Sauce Labs Bolt T-Shirt"
+      ],
+      "checkoutInfo": {
+        "firstName": "Alice",
+        "lastName": "Smith",
+        "postalCode": "98765"
+      }
+    }
+  ]
+}
