@@ -1,6 +1,47 @@
 # Playwright Test Suite – SauceDemo
 
-This repository contains an automated end-to-end test suite for the [saucedemo.com](https://www.saucedemo.com) sample shop, built with **[Playwright](https://playwright.dev)** in JavaScript.
+<!-- Build Status Badges: Update file names if workflow names change -->
+[![Regression Workflow](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/regression.yml/badge.svg)](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/regression.yml)
+[![Reusable Test Template Workflow](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/reusable-test-template.yml/badge.svg)](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/reusable-test-template.yml)
+[![Playwright Regression Template Workflow](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/playwright-regression-template.yml/badge.svg)](https://github.com/ravs788/playwright-test-saucedemo/actions/workflows/playwright-regression-template.yml)
+![Node](https://img.shields.io/badge/Node.js-%3E=18.x-blue?logo=node.js)
+![License](https://img.shields.io/badge/License-MIT-green)
+![Playwright](https://img.shields.io/badge/Playwright-E2E-green?logo=playwright)
+
+---
+
+**Repository**: [github.com/ravs788/playwright-test-saucedemo](https://github.com/ravs788/playwright-test-saucedemo)  
+**Issues**: [Open Issues](https://github.com/ravs788/playwright-test-saucedemo/issues)  
+**Pull Requests**: [View PRs](https://github.com/ravs788/playwright-test-saucedemo/pulls)  
+**Actions**: [GitHub Actions Workflow](https://github.com/ravs788/playwright-test-saucedemo/actions)
+
+---
+
+## 📊 Summary of Features
+
+_Feature list and roadmap is maintained in [additional-features.txt](additional-features.txt). The table below summarizes current status and maps directly to the entries in that file. When implementing new features or updating capabilities, ensure both `README.md` and `additional-features.txt` stay in sync._
+
+| Feature                                         | Status     |
+|-------------------------------------------------|------------|
+| Test Coverage Reporting                         | ❌ Not yet   |
+| Advanced Reporting                              | ✅ Implemented (Playwright HTML Report, artifact upload) |
+| Parallel Execution & Matrix Builds              | ❌ Not yet   |
+| Visual Regression Testing                       | ❌ Not yet   |
+| Accessibility Checks (a11y)                     | ❌ Not yet   |
+| API Testing                                     | ❌ Not yet   |
+| Continuous Feedback (Slack/Email/etc.)          | ❌ Not yet   |
+| Test Tagging & Filtering                        | ✅ Implemented (@smoke, @regression via titles) |
+| Data-Driven & Parameterized Testing             | ✅ Implemented (e.g. login tests) |
+| Test Flake Detection/Handling                   | ❌ Not yet   |
+| Performance/Network Profiling                   | ❌ Not yet   |
+| Network Request Mocking/Intercepts              | ❌ Not yet   |
+| Test Artifacts Archival                         | ✅ Implemented (HTML report upload) |
+| Third-Party Integration (Jira/TestRail/etc.)    | ❌ Not yet   |
+| Automatic PR Validation (via GitHub Actions)    | ✅ Implemented |
+
+_See [additional-features.txt](additional-features.txt) for details on each feature, description, and enhancement ideas._
+
+---
 
 ![Playwright](https://img.shields.io/badge/Playwright-E2E-green?logo=playwright)
 ![Node](https://img.shields.io/badge/Node.js-%3E=18.x-blue?logo=node.js)
@@ -73,11 +114,11 @@ npx playwright test tests/loginTests.spec.js
 
 ## 🏷️ Test Tagging & Filtering
 
-Tests are annotated with tags via the [Playwright annotation object syntax](https://playwright.dev/docs/test-annotations):
+Tests are tagged for filtering by including `@smoke`, `@regression`, etc. _directly in their test title string_:
 
 ```js
-test('description', { tag: '@smoke' }, async ({ ... }) => { ... });
-test('...', { tag: '@regression' }, async () => { ... });
+test('login with valid credentials @smoke', async ({ ... }) => { ... });
+test('should handle checkout failure @regression', async () => { ... });
 ```
 
 To run only regression tests:
@@ -91,6 +132,34 @@ To run smoke tests:
 ```bash
 npx playwright test --grep "@smoke"
 ```
+
+_Note:_ Playwright's `--grep` flag will only match tags that are present in the test's title (the first argument string). Be sure to add `@smoke` or `@regression` into your test title wherever filtering by tag is desired.
+
+---
+
+## 🧪 Parameterized Tests
+
+Some test suites (such as loginTests.spec.js) use data-driven parameterization to generate multiple tests from a data array. This is done by looping over the data and dynamically creating a test for each parameter set:
+
+```js
+const users = [
+  { username: 'standard_user', password: 'secret_sauce', valid: true },
+  { username: 'locked_out_user', password: 'secret_sauce', valid: false },
+  // ...more
+];
+
+users.forEach(({ username, password, valid }) => {
+  test(
+    `login with "${username}" and password "${password}" should ${valid ? "succeed" : "fail"} @smoke`,
+    async ({ page }) => {
+      // ...test logic...
+    }
+  );
+});
+```
+
+- Each generated test will appear in the Playwright report and CLI output as a separate test case.
+- You can include tags (like `@smoke`) directly in the dynamically generated test title, so these parameterized cases can also be filtered with `--grep "@smoke"`.
 
 ---
 
