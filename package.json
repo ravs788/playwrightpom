@@ -5,7 +5,8 @@
   "scripts": {
     "clean": "rimraf test-results playwright-report",
     "test": "npm run clean && npx playwright test",
-    "test:regression": "npm run clean && npx playwright test --grep '@regression'"
+    "test:regression": "npm run clean && npx playwright test --grep '@regression'",
+    "test:coverage": "npm run clean && npx playwright-coverage --reporter=html,lcov -- npx playwright test"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,8 @@
   "devDependencies": {
     "@playwright/test": "^1.54.2",
     "rimraf": "^5.0.0"
+  },
+  "dependencies": {
+    "eslint": "^9.32.0"
   }
 }
