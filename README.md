@@ -1,5 +1,11 @@
 # Playwright Test Suite – SauceDemo
 
+<!-- Project Badges: Issues | Forks | Stars | License -->
+[![Issues](https://img.shields.io/github/issues/ravs788/playwrightpom)](https://github.com/ravs788/playwrightpom/issues)
+[![Forks](https://img.shields.io/github/forks/ravs788/playwrightpom?style=social)](https://github.com/ravs788/playwrightpom/network/members)
+[![Stars](https://img.shields.io/github/stars/ravs788/playwrightpom?style=social)](https://github.com/ravs788/playwrightpom/stargazers)
+[![License](https://img.shields.io/github/license/ravs788/playwrightpom)](https://github.com/ravs788/playwrightpom/blob/main/LICENSE)
+
 <!-- Build Status Badges: Update file names if workflow names change -->
 [![Pull Request Tests](https://github.com/ravs788/playwrightpom/actions/workflows/pr-tests.yml/badge.svg)](https://github.com/ravs788/playwrightpom/actions/workflows/pr-tests.yml)
 [![Daily Regression Run](https://github.com/ravs788/playwrightpom/actions/workflows/regression.yml/badge.svg)](https://github.com/ravs788/playwrightpom/actions/workflows/regression.yml)
